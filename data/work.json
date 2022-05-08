@@ -1,0 +1,28 @@
+{
+    "intents": [{
+            "tag": ["công việc"],
+            "questions": ["Đề tài", "Làm về cái gì?"],
+            "answers": ["Tạo chatbot AI đó :D", "Tạo cái ChatBot AI m ơi :V"],
+            "context_set": ""
+        },
+        {
+            "tag": ["khó khăn"],
+            "questions": ["Khó khăn", "Cực khổ", "cực", "khổ", "khó"],
+            "answers": ["cũng không khó lắm! nhưng 2 tuần làm thì hết 1 tuần rưởi fix bug :D", "Ban đầu thì cũng co chút khó khan khi cài thư viện, dần sau thì tìm được hướng giải quyết khác"],
+            "context_set": ""
+        },
+        {
+            "tag": ["thời gian"],
+            "questions": ["mất bao lâu", "lâu", "tốn"],
+            "answers": ["cũng khá lâu, tầm khoảng đầu tháng 4 tới giờ!"],
+            "context_set": ""
+        },
+        {
+            "tag": ["chatbot AI"],
+            "questions": ["Bạn là ai", "tên bạn là gì?", "đang nhắn tin với ai"],
+            "answers": ["Tôi lad ChatBot AI được các thành viên nhóm 7 tạo ra nhằm giải đáp các thắc mắc của các bạn! hãy hỏi tôi bất cứ điều gì, tôi sẽ trả lời nếu nó nằm trong phạm vi hiểu biết của tôi!"],
+            "context_set": ""
+        }
+    ]
+
+}

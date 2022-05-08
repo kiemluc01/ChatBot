@@ -1,0 +1,106 @@
+{
+    "intents": [{
+            "tag": ["chào"],
+            "questions": ["hi", "how are you", "whats up", "hello", "is anyone there"],
+            "answers": ["Hello", "Good to see you again!", "Hi there, how can i help you??"],
+            "context_set": ""
+        },
+        {
+            "tag": ["tên nhóm", "nhóm tên"],
+            "questions": ["tên", "nhóm mấy", "name group", "name group", "nhóm có tên", "tên của nhóm"],
+            "answers": ["Nhóm 7", "tên nhóm: nhóm 7", "trên cùng có tên nhóm :v"],
+            "context_set": ""
+        },
+        {
+            "tag": ["số thành viên"],
+            "questions": ["có mấy thành viên", "mấy thành viên", "bao nhiêu người", "bao nhiêu thành viên", "sô lượng"],
+            "answers": ["6 nhaaa!", "có 6 Thành viên"],
+            "context_set": ""
+        },
+        {
+            "tag": ["tên thành viên"],
+            "questions": ["thành viên", "tên từng người", "member name", "member"],
+            "answers": ["Nguyễn Kiêm Lực, Nguyễn Văn quỳnh, Nguyễn Minh Tuấn, Nguyễn trọng Hưng, Nguyễn Văn Thuấn, Lê Văn Bảo Chung", "Lực, Quỳnh, Thuấn, Hưng, Tuấn, Chung"],
+            "context_set": ""
+        },
+        {
+            "tag": ["leader"],
+            "questions": ["nhóm trưởng", "trưởng nhóm", "leader"],
+            "answers": ["Nguyễn Kiêm Lực", "Kiêm Lực", "Lực"],
+            "context_set": ""
+        },
+        {
+            "tag": ["deputy"],
+            "questions": ["nhóm phó", "phó nhóm", "deputy group", "deputy"],
+            "answers": ["Nguyễn Văn quỳnh", "Văn Quỳnh", "Quỳnh"],
+            "context_set": ""
+        },
+        {
+            "tag": ["leader2"],
+            "questions": ["Nguyễn Kiêm Lực", "Lực", "Kiêm Lực", "Lực Nguyễn", "Nguyễn Lực"],
+            "answers": ["Nhóm trưởng", "Leader"],
+            "context_set": ""
+        },
+        {
+            "tag": ["deputy2"],
+            "questions": ["Nguyễn Văn Quỳnh", "Quỳnh", "Văn Quỳnh", "Quỳnh Nguyễn"],
+            "answers": ["Nhóm phó", "deputy"],
+            "context_set": ""
+        },
+        {
+            "tag": ["member"],
+            "questions": ["Nguyễn Văn Thuấn", "Nguyễn Trọng Hưng", "Nguyễn Minh Tuấn", "Lê Văn Bảo Chung"],
+            "answers": ["Thành viên", "commoner"],
+            "context_set": ""
+        },
+        {
+            "tag": ["quê", "ở đâu", "ở mô"],
+            "questions": ["Thuấn", "Lực", "Chung", "Tuấn"],
+            "answers": ["Quảng trị", "là trai Quảng Trị nha"],
+            "context_set": ""
+        },
+        {
+            "tag": ["quê", "ở đâu", "ở mô"],
+            "questions": ["Quỳnh"],
+            "answers": ["Quảng Bình", "là trai Quảng Bình nha"],
+            "context_set": ""
+        },
+        {
+            "tag": ["quê", "ở đâu", "ở mô"],
+            "questions": ["Hưng"],
+            "answers": ["Nghệ An", "là trai Nghệ An nha"],
+            "context_set": ""
+        },
+        {
+            "tag": ["member"],
+            "questions": ["Nguyễn Văn Thuấn", "Nguyễn Trọng Hưng", "Nguyễn Minh Tuấn", "Lê Văn Bảo Chung"],
+            "answers": ["Thành viên", "commoner"],
+            "context_set": ""
+        },
+        {
+            "tag": ["member"],
+            "questions": ["Nguyễn Văn Thuấn", "Nguyễn Trọng Hưng", "Nguyễn Minh Tuấn", "Lê Văn Bảo Chung"],
+            "answers": ["Thành viên", "commoner"],
+            "context_set": ""
+        },
+        {
+            "tag": ["công việc"],
+            "questions": ["Đề tài", "Làm về cái gì?"],
+            "answers": ["Tạo chatbot AI đó :D", "Tạo cái ChatBot AI m ơi :V"],
+            "context_set": ""
+        },
+        {
+            "tag": ["khó khăn"],
+            "questions": ["Khó khăn", "Cực khổ", "khổ", "khó"],
+            "answers": ["cũng không khó lắm! nhưng 2 tuần làm thì hết 1 tuần rưởi fix bug :D"],
+            "context_set": ""
+        },
+        {
+            "tag": ["chatbot AI"],
+            "questions": ["Bạn là ai", "tên bạn là gì?", "đang nhắn tin với ai"],
+            "answers": ["Tôi lad ChatBot AI được các thành viên nhóm 7 tạo ra nhằm giải đáp các thắc mắc của các bạn! hãy hỏi tôi bất cứ điều gì, tôi sẽ trả lời nếu nó nằm trong phạm vi hiểu biết của tôi!"],
+            "context_set": ""
+        }
+    ]
+
+}

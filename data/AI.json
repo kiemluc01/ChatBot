@@ -1,0 +1,16 @@
+{
+    "intents": [{
+            "tag": ["chatbot AI"],
+            "questions": ["Bạn là ai", "tên bạn là gì?", "đang nhắn tin với ai"],
+            "answers": ["Tôi là một phần của AI, là ChatBot AI được các thành viên nhóm 7 tạo ra nhằm giải đáp các thắc mắc của các bạn! hãy hỏi tôi bất cứ điều gì, tôi sẽ trả lời nếu nó nằm trong phạm vi hiểu biết của tôi!"],
+            "context_set": ""
+        },
+        {
+            "tag": ["chatbot AI"],
+            "questions": ["là gì", "AI", "Trí tuệ nhân tạo"],
+            "answers": ["Trí tuệ nhân tạo hay trí thông minh nhân tạo (Artificial intelligence  – viết tắt là AI) là một ngành thuộc lĩnh vực khoa học máy tính (Computer science). Là trí tuệ do con người lập trình tạo nên với mục tiêu giúp máy tính có thể tự động hóa các hành vi thông minh như con người!"],
+            "context_set": ""
+        }
+    ]
+
+}

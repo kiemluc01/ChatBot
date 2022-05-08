@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <center>
+        <h1>Chatbot AI - Nhóm 7</h1>
+        <h3>Hỏi tôi nêu bạn có thắc mắc!</h3>
+    </center>
+    <div>
+        <div id="chatbox">
+            <div class="container">
+                <div class="botText_container">
+                    <img src="images/avt_bot.png" alt="avt_bot">
+                    <p class="botText"><span>Chat với tôi!</span></p>
+                </div>
+                <div class="tmp"></div>
+            </div>
+            <div class="container">
+                <div class="tmp"></div>
+                <div class="userText_container">
+                    <p class="userText"><span>Chat với tôi!</span></p>
+                    <img src="images/avt_bot.png" alt="avt_bot">
+                </div>
+            </div>
+        </div>
+        <div id="userInput">
+            <input id="textInput" type="text" name="msg" placeholder="Message">
+            <input id="buttonInput" type="submit" value="Send">
+        </div>
+        <script>
+            var DB = ""
+
+            function gotoBottom() {
+                var element = document.getElementById('chatbot');
+                element.scrollTop = element.scrollHeight - element.clientHeight;
+            }
+
+            function getBotResponse() {
+                var rawText = $("#textInput").val();
+                var userHtml = '<div class="container"><div class="tmp"></div><div class="userText_container"><p class="userText"><span>' + rawText + '</span></p><img src="images/avt_bot.png" alt="avt_bot"></div></div>';
+                $("#textInput").val("");
+                $("#chatbox").append(userHtml);
+                document.getElementById('userInput').scrollIntoView({
+                    block: 'start',
+                    behavior: 'smooth'
+                });
+                $.get("/get", {
+                    msg: rawText,
+                    DB: DB
+                }).done(function(data) {
+                    var botHtml = '<div class="container"><div class="botText_container"><img src="images/avt_bot.png" alt="avt_bot"><p class="botText"><span>' + data + '</span></p></div><div class="tmp"></div></div>';
+                    $("#chatbox").append(botHtml);
+                    document.getElementById('userInput').scrollIntoView({
+                        block: 'start',
+                        behavior: 'smooth'
+
+                    });
+                    gotoBottom();
+                });
+
+            }
+            $("#textInput").keypress(function(e) {
+                if (e.which == 13) {
+                    getBotResponse();
+                }
+            });
+            $("#buttonInput").click(function() {
+                getBotResponse();
+            })
+            $("#btnInforGroup").click(function() {
+                document.getElementById('chatbox').innerHTML = ""
+                var botHtml = '<div class="botText"><span>Bạn muốn biết gì về nhóm mình?</span></div>';
+                $("#chatbox").append(botHtml);
+                DB = "InforGroup"
+            })
+            $("#btnAI").click(function() {
+                document.getElementById('chatbox').innerHTML = ""
+                var botHtml = '<p class="botText"><span>Bạn muốn biết gì về AI?</span></p>';
+                $("#chatbox").append(botHtml);
+                DB = "AI"
+            })
+            $("#btnInforSchool").click(function() {
+                document.getElementById('chatbox').innerHTML = ""
+                var botHtml = '<div class="botText"><span>Bạn muốn biết gì về trường Đại học Sư phạm Kỹ thuật?</span></div>';
+                $("#chatbox").append(botHtml);
+                DB = "UTE"
+            })
+            $("#btnWork").click(function() {
+                document.getElementById('chatbox').innerHTML = ""
+                var botHtml = '<p class="botText"><span>Chúng tôi đang làm về ChatBot AI?</span></p>';
+                $("#chatbox").append(botHtml);
+                DB = "work"
+            })
+        </script>
+    </div>
+</body>
+
+</html>

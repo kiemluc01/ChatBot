@@ -1,0 +1,116 @@
+body {
+    font-family: Garamond;
+    padding: 0%;
+    margin: 0;
+}
+
+h1 {
+    color: black;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-align: center;
+    font-size: 40px;
+}
+
+h3 {
+    color: black;
+    font-size: 20px;
+    margin-top: 3px;
+    text-align: center;
+}
+
+#chatbox {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    margin-top: 5vh;
+    height: 57vh;
+    overflow-y: auto;
+}
+
+#userInput {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    margin-top: 60px;
+    border-radius: 5%/5%;
+}
+
+#textInput {
+    width: 86%;
+    border: none;
+    border-bottom: 3px solid #009688;
+    font-family: monospace;
+    font-size: 17px;
+}
+
+#buttonInput {
+    margin-left: 2%;
+    width: 10%;
+    height: 25px;
+    line-height: 20px;
+    font-family: monospace;
+    font-size: 17px;
+    float: right;
+}
+
+.userText {
+    color: white;
+    font-family: monospace;
+    font-size: 17px;
+    line-height: 30px;
+    margin-left: 20%;
+    width: 80%;
+}
+
+.userText span {
+    background-color: rgb(23, 223, 140);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.botText {
+    color: white;
+    font-family: monospace;
+    font-size: 17px;
+    text-align: left;
+    line-height: 30px;
+    width: 80%;
+    margin-right: 20%;
+}
+
+.botText span {
+    background-color: #291fb3;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+img {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%/50%;
+}
+
+.userText img {
+    float: right;
+    margin-left: 10px;
+}
+
+.botText img {
+    float: left;
+    margin-right: 10px;
+}
+
+.botText_container {
+    width: auto;
+    max-width: 75%;
+    background-color: #291fb3;
+    border-radius: 10px/10px;
+}
+
+.botText_container {
+    width: auto;
+    max-width: 75%;
+    background-color: #009688;
+    border-radius: 10px/10px;
+}
