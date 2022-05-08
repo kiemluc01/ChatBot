@@ -2,8 +2,9 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
     <meta charset="utf-8">
 </head>
 
@@ -16,17 +17,10 @@
         <div id="chatbox">
             <div class="container">
                 <div class="botText_container">
-                    <img src="images/avt_bot.png" alt="avt_bot">
+                    <img src="/static/images/avt_bot.png" alt="avt">
                     <p class="botText"><span>Chat với tôi!</span></p>
                 </div>
                 <div class="tmp"></div>
-            </div>
-            <div class="container">
-                <div class="tmp"></div>
-                <div class="userText_container">
-                    <p class="userText"><span>Chat với tôi!</span></p>
-                    <img src="images/avt_bot.png" alt="avt_bot">
-                </div>
             </div>
         </div>
         <div id="userInput">
@@ -36,14 +30,14 @@
         <script>
             var DB = ""
 
-            function gotoBottom() {
-                var element = document.getElementById('chatbot');
-                element.scrollTop = element.scrollHeight - element.clientHeight;
-            }
+            function gotoBottom(){
+                var element = document.getElementById("chatbox");
+                element.scrollTop = element.scrollHeight- element.clientHeight
+             }
 
             function getBotResponse() {
                 var rawText = $("#textInput").val();
-                var userHtml = '<div class="container"><div class="tmp"></div><div class="userText_container"><p class="userText"><span>' + rawText + '</span></p><img src="images/avt_bot.png" alt="avt_bot"></div></div>';
+                var userHtml = '<div class="container"><div class="tmp"></div><div class="userText_container"><p class="userText"><span>' + rawText + '</span></p><img src="/static/images/avt_bot.webp" alt="avt"></div></div>';
                 $("#textInput").val("");
                 $("#chatbox").append(userHtml);
                 document.getElementById('userInput').scrollIntoView({
@@ -54,7 +48,7 @@
                     msg: rawText,
                     DB: DB
                 }).done(function(data) {
-                    var botHtml = '<div class="container"><div class="botText_container"><img src="images/avt_bot.png" alt="avt_bot"><p class="botText"><span>' + data + '</span></p></div><div class="tmp"></div></div>';
+                    var botHtml = '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.webp" alt="avt"><p class="botText"><span>' + data + '</span></p></div><div class="tmp"></div></div>';
                     $("#chatbox").append(botHtml);
                     document.getElementById('userInput').scrollIntoView({
                         block: 'start',
@@ -63,7 +57,7 @@
                     });
                     gotoBottom();
                 });
-
+                
             }
             $("#textInput").keypress(function(e) {
                 if (e.which == 13) {
