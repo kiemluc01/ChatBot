@@ -9,6 +9,27 @@
 </head>
 
 <body>
+    <ul id="header">
+        <li class="logo">
+            <img src="static/images/avt_bot.png" alt="">
+            <h1>ChatBot</h1>
+        </li>
+        <li class="menu">
+            <div>
+                <div></div>
+                <div>
+                    <img src="static/images/menu.png" alt="">
+                    <h3>Menu</h3>
+                </div>
+            </div>
+            <ul class="submenu">
+                <li id="BGH"><span>Ban giám hiệu</span></li>
+                <li id="LSPT"><span>Lịch sử phát triển</span></li>
+                <li><span>Chương Trình Đào tạo</span></li>
+                <li><span>Thư Viện</span></li>
+            </ul>
+        </li>
+    </ul>
     <center>
         <h1>Chatbot AI - Nhóm 7</h1>
         <h3>Hỏi tôi nêu bạn có thắc mắc!</h3>
@@ -29,7 +50,7 @@
         </div>
         <script>
             var DB = ""
-
+            
             function gotoBottom(){
                 var element = document.getElementById("chatbox");
                 element.scrollTop = element.scrollHeight- element.clientHeight
@@ -59,13 +80,17 @@
                 });
                 
             }
-            $("#textInput").keypress(function(e) {
-                if (e.which == 13) {
+            
+            $("#textInput").keypress(function(e) {               
+                if (e.which == 13 && $("#textInput").val() != '') {
                     getBotResponse();
                 }
             });
             $("#buttonInput").click(function() {
-                getBotResponse();
+                if($("#textInput").val() != ''){
+                    getBotResponse();
+                }
+                
             })
             $("#btnInforGroup").click(function() {
                 document.getElementById('chatbox').innerHTML = ""

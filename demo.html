@@ -2,12 +2,34 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="static/main.css">
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <meta charset="utf-8">
 </head>
 
 <body>
+    <ul id="header">
+        <li class="logo">
+            <img src="static/images/avt_bot.png" alt="">
+            <h1>ChatBot</h1>
+        </li>
+        <li class="menu">
+            <div>
+                <div></div>
+                <div>
+                    <img src="static/images/menu.png" alt="">
+                    <h3>Menu</h3>
+                </div>
+            </div>
+            <ul class="submenu">
+                <li id="BGH"><span>Ban giám hiệu</span></li>
+                <li id="LSPT"><span>Lịch sử phát triển</span></li>
+                <li><span>Chương Trình Đào tạo</span></li>
+                <li><span>Thư Viện</span></li>
+            </ul>
+        </li>
+    </ul>
     <center>
         <h1>Chatbot AI - Nhóm 7</h1>
         <h3>Hỏi tôi nêu bạn có thắc mắc!</h3>
@@ -16,34 +38,27 @@
         <div id="chatbox">
             <div class="container">
                 <div class="botText_container">
-                    <img src="images/avt_bot.png" alt="avt_bot">
+                    <img src="/static/images/avt_bot.png" alt="avt">
                     <p class="botText"><span>Chat với tôi!</span></p>
                 </div>
                 <div class="tmp"></div>
             </div>
-            <div class="container">
-                <div class="tmp"></div>
-                <div class="userText_container">
-                    <p class="userText"><span>Chat với tôi!</span></p>
-                    <img src="images/avt_bot.png" alt="avt_bot">
-                </div>
-            </div>
         </div>
         <div id="userInput">
             <input id="textInput" type="text" name="msg" placeholder="Message">
-            <input id="buttonInput" type="submit" value="Send">
+            <input id="buttonInput" type="image" src="/static/images/submit.png" value="Send">
         </div>
         <script>
             var DB = ""
 
             function gotoBottom() {
-                var element = document.getElementById('chatbot');
-                element.scrollTop = element.scrollHeight - element.clientHeight;
+                var element = document.getElementById("chatbox");
+                element.scrollTop = element.scrollHeight - element.clientHeight
             }
 
             function getBotResponse() {
                 var rawText = $("#textInput").val();
-                var userHtml = '<div class="container"><div class="tmp"></div><div class="userText_container"><p class="userText"><span>' + rawText + '</span></p><img src="images/avt_bot.png" alt="avt_bot"></div></div>';
+                var userHtml = '<div class="container"><div class="tmp"></div><div class="userText_container"><p class="userText"><span>' + rawText + '</span></p><img src="/static/images/avt_bot.webp" alt="avt"></div></div>';
                 $("#textInput").val("");
                 $("#chatbox").append(userHtml);
                 document.getElementById('userInput').scrollIntoView({
@@ -54,7 +69,7 @@
                     msg: rawText,
                     DB: DB
                 }).done(function(data) {
-                    var botHtml = '<div class="container"><div class="tmp"></div><div class="userText_container"><p class="botText"><span>' + data + '</span></p><img src="images/avt_bot.png" alt="avt_bot"></div></div>';
+                    var botHtml = '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.webp" alt="avt"><p class="botText"><span>' + data + '</span></p></div><div class="tmp"></div></div>';
                     $("#chatbox").append(botHtml);
                     document.getElementById('userInput').scrollIntoView({
                         block: 'start',
@@ -65,13 +80,17 @@
                 });
 
             }
+
             $("#textInput").keypress(function(e) {
-                if (e.which == 13) {
+                if (e.which == 13 && $("#textInput").val() != '') {
                     getBotResponse();
                 }
             });
             $("#buttonInput").click(function() {
-                getBotResponse();
+                if ($("#textInput").val() != '') {
+                    getBotResponse();
+                }
+
             })
             $("#btnInforGroup").click(function() {
                 document.getElementById('chatbox').innerHTML = ""
