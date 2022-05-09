@@ -1,7 +1,100 @@
 body {
     padding: 0%;
     margin: 0%;
+    font-family: roboto;
 }
+
+@font-face {
+    font-family: roboto;
+    src: url("/static/font/Roboto/Roboto-Bold.ttf");
+}
+
+
+/* header */
+
+ul {
+    font-family: roboto;
+    padding: 0%;
+    margin: 0%;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    /* background-color: #C4C4C4; */
+}
+
+li {
+    list-style-type: none;
+}
+
+.logo img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%/50%;
+    float: left;
+}
+
+.menu {
+    margin-right: 30px;
+    position: relative;
+}
+
+.menu div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu div div {
+    display: flex;
+}
+
+.menu div div img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%/50%;
+}
+
+div h3 {
+    line-height: 40px;
+}
+
+li h1 {
+    float: right;
+    line-height: 40px;
+}
+
+.submenu {
+    position: fixed;
+    top: 60px;
+    right: 30px;
+    display: none;
+    background-color: #C4C4C4;
+    border-radius: 10px/10px;
+}
+
+.menu:hover .submenu {
+    display: block;
+}
+
+.submenu li {
+    color: #FFF;
+    padding: 10px;
+    font-weight: bold;
+    max-width: 200px;
+}
+
+li span {
+    line-height: 20px;
+}
+
+.submenu li:hover {
+    background-color: #918f8f;
+    border-radius: 10px/10px;
+}
+
+
+/* Chatbot container */
 
 img {
     width: 40px;
@@ -19,6 +112,21 @@ img {
     height: 60vh;
     overflow-y: auto;
     padding: 0%;
+    border: #ebe8e8 2px solid;
+    border-radius: 10px/10px;
+}
+
+
+/* scrollbar */
+
+#chatbox::-webkit-scrollbar {
+    width: 6px;
+    background-color: rgb(240, 240, 240);
+    /* border-radius: 2px/2px; */
+}
+
+#chatbox::-webkit-scrollbar-thumb {
+    background-color: #c6c9c6;
 }
 
 .botText_container,
@@ -49,7 +157,7 @@ img {
     padding: 5px;
     font-size: 17px;
     line-height: 30px;
-    font-family: monospace;
+    font-family: roboto;
 }
 
 .botText {
@@ -60,31 +168,40 @@ img {
     padding: 5px;
     font-size: 17px;
     line-height: 30px;
-    font-family: monospace;
+    font-family: roboto;
 }
 
 #userInput {
     margin-left: auto;
     margin-right: auto;
-    width: 40%;
+    width: 50%;
     margin-top: 60px;
-    border-radius: 5%/5%;
+    border-radius: 15px/15px;
+    border: 3px solid #009688;
 }
 
 #textInput {
-    width: 86%;
+    width: 80%;
+    height: 30px;
     border: none;
-    border-bottom: 3px solid #009688;
-    font-family: monospace;
+    font-family: roboto;
     font-size: 17px;
+    padding: 5px;
+    padding-left: 10px;
+    border-radius: 15px/15px;
 }
 
 #buttonInput {
-    margin-left: 2%;
-    width: 25px;
-    height: 25px;
+    margin-right: 1.5%;
+    width: 30px;
+    height: 30px;
     line-height: 20px;
-    font-family: monospace;
+    font-family: roboto;
     font-size: 17px;
     float: right;
+    padding: 5px;
+}
+
+#textInput:focus {
+    outline-width: 0;
 }
