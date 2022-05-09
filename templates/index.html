@@ -11,7 +11,7 @@
 <body>
     <ul id="header">
         <li class="logo">
-            <img src="static/images/avt_bot.png" alt="">
+            <img src="static/images/avt_bot.png" id="home" alt="">
             <h1>ChatBot</h1>
         </li>
         <li class="menu">
@@ -31,7 +31,7 @@
         </li>
     </ul>
     <center>
-        <h1>Chatbot AI - Nhóm 7</h1>
+        <h1>Welcome to ChatBot</h1>
         <h3>Hỏi tôi nêu bạn có thắc mắc!</h3>
     </center>
     <div>
@@ -45,7 +45,7 @@
             </div>
         </div>
         <div id="userInput">
-            <textarea id="textInput" rows="10" cols="20" name="msg" placeholder="Message"></textarea>
+            <input type="text" name="msg" placeholder="Message" id="textInput">
             
             <input id="buttonInput" type="image" src="/static/images/submit.png" value="Send">
         </div>
@@ -59,7 +59,7 @@
 
             function getBotResponse() {
                 var rawText = $("#textInput").val();
-                var userHtml = '<div class="container"><div class="tmp"></div><div class="userText_container"><p class="userText"><span>' + rawText + '</span></p><img src="/static/images/avt_bot.webp" alt="avt"></div></div>';
+                var userHtml = '<div class="container"><div class="tmp"></div><div class="userText_container"><p class="userText"><span>' + rawText + '</span></p><img src="/static/images/avt_user.jpg" alt="avt"></div></div>';
                 $("#textInput").val("");
                 $("#chatbox").append(userHtml);
                 document.getElementById('userInput').scrollIntoView({
@@ -70,7 +70,7 @@
                     msg: rawText,
                     DB: DB
                 }).done(function(data) {
-                    var botHtml = '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.webp" alt="avt"><p class="botText"><span>' + data + '</span></p></div><div class="tmp"></div></div>';
+                    var botHtml = '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>' + data + '</span></p></div><div class="tmp"></div></div>';
                     $("#chatbox").append(botHtml);
                     document.getElementById('userInput').scrollIntoView({
                         block: 'start',
@@ -93,29 +93,32 @@
                 }
                 
             })
-            $("#btnInforGroup").click(function() {
+            $("#BGH").click(function() {
                 document.getElementById('chatbox').innerHTML = ""
-                var botHtml = '<div class="botText"><span>Bạn muốn biết gì về nhóm mình?</span></div>';
+                var botHtml = '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>Bạn muốn biết gì về nhóm mình?</span></p></div><div class="tmp"></div></div>';
                 $("#chatbox").append(botHtml);
                 DB = "InforGroup"
             })
             $("#btnAI").click(function() {
                 document.getElementById('chatbox').innerHTML = ""
-                var botHtml = '<p class="botText"><span>Bạn muốn biết gì về AI?</span></p>';
+                var botHtml = '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>Hello</span></p></div><div class="tmp"></div></div>';
                 $("#chatbox").append(botHtml);
                 DB = "AI"
             })
             $("#btnInforSchool").click(function() {
                 document.getElementById('chatbox').innerHTML = ""
-                var botHtml = '<div class="botText"><span>Bạn muốn biết gì về trường Đại học Sư phạm Kỹ thuật?</span></div>';
+                var botHtml = '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>Say Hi</span></p></div><div class="tmp"></div></div>';
                 $("#chatbox").append(botHtml);
                 DB = "UTE"
             })
             $("#btnWork").click(function() {
                 document.getElementById('chatbox').innerHTML = ""
-                var botHtml = '<p class="botText"><span>Chúng tôi đang làm về ChatBot AI?</span></p>';
+                var botHtml = '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>Lét your say?</span></p></div><div class="tmp"></div></div>';
                 $("#chatbox").append(botHtml);
                 DB = "work"
+            })
+            $("#home").click(function(){
+                location.reload();
             })
         </script>
     </div>
