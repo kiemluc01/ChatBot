@@ -65,6 +65,7 @@ def getLichThi(user , password):
     else:
         print("tài khoản hoặc mật khẩu không chính xác!!!")
 def lichhoc(maSV):
+    print(1)
     chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
                                       # and if it doesn't exist, download it automatically,
                                       # then add chromedriver to path
@@ -72,10 +73,13 @@ def lichhoc(maSV):
     chrome_options = webdriver.ChromeOptions()
 # setting headless parameter
     chrome_options.headless = True
+    chrome_options.add_argument("--incognito")
     driver = webdriver.Chrome(chrome_options = chrome_options)
     driver.get("http://daotao.ute.udn.vn/timetable.asp")
     driver.find_element_by_name("maSV").send_keys(maSV)
+    print(2)
     if(maSV.isnumeric()):
+        print(3)
         driver.find_element_by_xpath("//form[@action='svtkb.asp']//table//tbody//tr//td//table//tbody//tr//td//input[@type='submit']").click()
         data =[]
         data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr")
@@ -97,9 +101,14 @@ def lichhoc(maSV):
         data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr//td")
         for i in range(d*9):
             result[i%9].append(str(data[i].text))
-        dt = pd.DataFrame(np.array(result))
+        # dt = pd.DataFrame(np.array(result))
         # print(display(dt))
-        return dt
+        strr = "</br>"
+        for i in result:
+            strr += '</br> '+i
+        print(strr)
+        return strr
+    print(4)
     return "Mã sinh viên không đúng"
 def hocphi():
     chromedriver_autoinstaller.install() 

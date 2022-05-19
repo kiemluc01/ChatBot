@@ -69,7 +69,7 @@
                     block: 'start',
                     behavior: 'smooth'
                 });
-                alert($.cookie("qts"))
+                // alert($.cookie("qts"))
                 if($.cookie("qts") == undefined || $.cookie("qts") == ""){
 
                     if(rawText.search("thời khóa biểu") >= 0){
@@ -90,6 +90,7 @@
                     });
                 }else
                 if($.cookie("qts") == "thời khóa biểu"){
+                    
                     $.get("/tkb", {
                         msv: rawText
                     }).done(function(data) {
@@ -100,6 +101,7 @@
                             behavior: 'smooth'
     
                         });
+                        alert("ok")
                         taoCookie("qts", undefined, 1)
                         gotoBottom();
                     });
@@ -153,7 +155,7 @@
                 var d = new Date();
                 d.setTime(d.getTime() + (han_su_dung*60*1000));
                 var ngay_het_han = "han_su_dung="+ d.toUTCString();
-                alert(ten + "=" + gia_tri + "; " + ngay_het_han)
+                // alert(ten + "=" + gia_tri + "; " + ngay_het_han)
                 document.cookie =ten + "=" + gia_tri + "; " + ngay_het_han;
             }
         </script>
