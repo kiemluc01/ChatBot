@@ -5,7 +5,7 @@ import json
 def crawl_data():
     BGH_PATH = "https://ute.udn.vn/LoaiBoPhan/1/Ban-Giam-hieu.aspx"
     sinhvienPATH = "https://sinhvien.ute.udn.vn/default.aspx#"
-    
+    # 
     result = requests.get(sinhvienPATH)
     soup = BeautifulSoup(result.content,"html")
     data = soup.find("h3",itemprop="name")
