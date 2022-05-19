@@ -98,10 +98,15 @@ def lichhoc(maSV):
         for i in range(d*9):
             result[i%9].append(str(data[i].text))
         dt = pd.DataFrame(np.array(result))
-        print(display(dt))
+        # print(display(dt))
         return dt
     return "Mã sinh viên không đúng"
 def hocphi():
+    chromedriver_autoinstaller.install() 
+    chrome_options = webdriver.ChromeOptions()
+# setting headless parameter
+    chrome_options.headless = True
+    driver = webdriver.Chrome(chrome_options = chrome_options)
     driver.get("http://daotao.ute.udn.vn/viewmsg.asp")
     a = driver.find_elements_by_xpath("//td[@id='pagemain']//a")
     # a = driver.find_elements_by_xpath("//td[@id='pagemain']//table//tbody//tr//td//a")
