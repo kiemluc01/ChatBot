@@ -1,7 +1,7 @@
 {
     "intents": [{
             "tag": ["chào"],
-            "questions": ["hi", "how are you", "whats up", "hello", "is anyone there"],
+            "questions": ["hi", "how are you", "whats up", "hello", "is anyone there" , "alo" , "bot" , "hey"],
             "answers": ["Hello", "Good to see you again!", "Hi there, how can i help you??"],
             "context_set": ""
         },
