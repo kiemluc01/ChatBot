@@ -66,9 +66,7 @@ def getLichThi(user , password):
         print("tài khoản hoặc mật khẩu không chính xác!!!")
 def lichhoc(maSV):
 
-    chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
-                                        # and if it doesn't exist, download it automatically,
-                                        # then add chromedriver to path
+    chromedriver_autoinstaller.install()
 
     chrome_options = webdriver.ChromeOptions()
     # setting headless parameter
@@ -77,9 +75,7 @@ def lichhoc(maSV):
     driver = webdriver.Chrome(chrome_options = chrome_options)
     driver.get("http://daotao.ute.udn.vn/timetable.asp")
     driver.find_element_by_name("maSV").send_keys(maSV)
-    print(2)
     if(maSV.isnumeric()):
-        print(3)
         driver.find_element_by_xpath("//form[@action='svtkb.asp']//table//tbody//tr//td//table//tbody//tr//td//input[@type='submit']").click()
         data =[]
         data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr")
@@ -99,14 +95,15 @@ def lichhoc(maSV):
 
         data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr//td")
         for i in range(d*9):
-            
             if i % 9 == 8:
                 result+=str(data[i].text)+"\n"
             else:
-                result+=str(data[i].text)+", "
-        print(result)
+                if i%9 == 7:
+                    result+=str(data[i].text)
+                else:
+                    result+=str(data[i].text)+", "
+        
         return result
-    print(4)
     return "Mã sinh viên không đúng"
 def hocphi():
     chromedriver_autoinstaller.install() 

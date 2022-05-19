@@ -94,14 +94,19 @@
                     $.get("/tkb", {
                         msv: rawText
                     }).done(function(data) {
-                        var botHtml = '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>' + data + '</span></p></div><div class="tmp"></div></div>';
+                        data = data.split("\n")
+                        var botHtml = ""
+                        for(i = 0;i<data.length;i++){
+                            if(data[i]!= "")
+                                botHtml+= '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>' + data[i] + '</span></p></div><div class="tmp"></div></div>';
+                        }
+                        
                         $("#chatbox").append(botHtml);
                         document.getElementById('userInput').scrollIntoView({
                             block: 'start',
                             behavior: 'smooth'
     
                         });
-                        alert("ok")
                         taoCookie("qts", undefined, 1)
                         gotoBottom();
                     });
