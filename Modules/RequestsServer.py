@@ -34,23 +34,32 @@ def getRespone(userText,db):
     return "Thông tin này AI chưa được học :D"
 
 def getLichThi(user , password):
-    chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
-                                      # and if it doesn't exist, download it automatically,
-                                      # then add chromedriver to path
     chrome_options = webdriver.ChromeOptions()
-# setting headless parameter
+    # setting headless parameter
     chrome_options.headless = True
     driver = webdriver.Chrome()
     driver.get("http://daotao.ute.udn.vn/viewsmsg.asp")
+    # username = "1911505310246"
+    # password = "190201"
     driver.find_element_by_name("maSV").send_keys(user)
-# find password input field and insert password as well
+    # find password input field and insert password as well
     driver.find_element_by_name("pw").send_keys(password)
-# click login button
+    # click login button
+
     driver.find_element_by_xpath("//tbody//tr//td//input[@type='submit']").click()
-    dataa = []
-    driver.get("http://daotao.ute.udn.vn/dkmhtc.asp")
-    dataa = driver.find_element_by_xpath("//div[@class='clearfix']//div//table//tbody//tr//div//li").text
-    return dataa
+
+    if(user.isnumeric()):
+        dataa = []
+        dataaa = []
+        dataaa = driver.find_element_by_xpath("//td[@id='pagemain']").text
+        if(str(dataaa).find("Đăng nhập không hợp lệ") >= 0):
+            print("Tài khoản hoặc mật khẩu không chính xác!!!")
+        else:
+            driver.get("http://daotao.ute.udn.vn/dkmhtc.asp")
+            dataa = driver.find_element_by_xpath("//div[@class='clearfix']//div//table//tbody//tr//div//li")
+            print(dataa.text)
+    else:
+        print("tài khoản hoặc mật khẩu không chính xác!!!")
 def lichhoc(maSV):
     chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
                                       # and if it doesn't exist, download it automatically,
@@ -62,30 +71,32 @@ def lichhoc(maSV):
     driver = webdriver.Chrome()
     driver.get("http://daotao.ute.udn.vn/timetable.asp")
     driver.find_element_by_name("maSV").send_keys(maSV)
-    driver.find_element_by_xpath("//form[@action='svtkb.asp']//table//tbody//tr//td//table//tbody//tr//td//input[@type='submit']").click()
-    data =[]
-    data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr")
+    if(maSV.isnumeric()):
+        driver.find_element_by_xpath("//form[@action='svtkb.asp']//table//tbody//tr//td//table//tbody//tr//td//input[@type='submit']").click()
+        data =[]
+        data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr")
 # result = requests.get(driver)
 # soup = BeautifulSoup(driver,"html.parser")
 # result = str(data).split(" ")
-    d =0
-    head = data[0]
-    for i in data:
-        if d!= 0 and i.text.find("Lớp")>=0:
-            d-=1
-            break
-        d+=1
-    result = []
-    data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr//th")
-    for i in range(9):
-        result.append([])
+        d =0
+        head = data[0]
+        for i in data:
+            if d!= 0 and i.text.find("Lớp")>=0:
+                d-=1
+                break
+            d+=1
+        result = []
+        data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr//th")
+        for i in range(9):
+            result.append([])
 
-    data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr//td")
-    for i in range(d*9):
-        result[i%9].append(str(data[i].text))
-    dt = pd.DataFrame(np.array(result))
-    print(display(dt))
-    return dt
+        data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr//td")
+        for i in range(d*9):
+            result[i%9].append(str(data[i].text))
+        dt = pd.DataFrame(np.array(result))
+        print(display(dt))
+        return dt
+    return "Mã sinh viên không đúng"
 def hocphi():
     driver.get("http://daotao.ute.udn.vn/viewmsg.asp")
     a = driver.find_elements_by_xpath("//td[@id='pagemain']//a")
@@ -93,7 +104,6 @@ def hocphi():
     for i in a:
     #     print(i.text)
         if i.text.find("thu học phí")>=0:
-            print("đây rồi")
             i.click()
             break
     td = driver.find_element_by_xpath("//td[@style='font-size:14px;padding-left: 1em']").text
