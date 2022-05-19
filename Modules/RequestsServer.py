@@ -37,7 +37,7 @@ def getRespone(userText,db):
                 return intents["answers"][random.randint(0, len(intents["answers"])-1)]
     return "Thông tin này AI chưa được học :D"
 
-def getLichThi(user , password):
+def getDKMH(user , password):
     chrome_options = webdriver.ChromeOptions()
     # setting headless parameter
     chrome_options.headless = True

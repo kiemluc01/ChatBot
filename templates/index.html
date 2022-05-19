@@ -61,6 +61,7 @@
             function getBotResponse() {
                 DB =""
                 var rawText = $("#textInput").val();
+                var pwText = $("#textInput").val();
                 var userHtml = '<div class="container"><div class="tmp"></div><div class="userText_container"><p class="userText"><span>' + rawText + '</span></p><img src="/static/images/avt_user.jpg" alt="avt"></div></div>';
                 $("#textInput").val("");
                 $("#chatbox").append(userHtml);
@@ -74,6 +75,8 @@
 
                     if(rawText.search("thời khóa biểu") >= 0){
                         taoCookie("qts", "thời khóa biểu", 1)
+                    }else if(rawText.search("ngày đăng ký môn học") >= 0) {
+                        taoCookie("qts", "ngày đăng ký môn học", 1)
                     }
                     $.get("/get", {
                         msg: rawText,
@@ -90,7 +93,6 @@
                     });
                 }else
                 if($.cookie("qts") == "thời khóa biểu"){
-                    
                     $.get("/tkb", {
                         msv: rawText
                     }).done(function(data) {
@@ -105,11 +107,24 @@
                         taoCookie("qts", undefined, 1)
                         gotoBottom();
                     });
+                }else
+                if($.cookie("qts") == "ngày đăng kí môn học"){
+                    $.get("/dkmh", {
+                        msv: rawText,
+                        pw : pwText
+                    }).done(function(data) {
+                        var botHtml = '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>' + data + '</span></p></div><div class="tmp"></div></div>';
+                        $("#chatbox").append(botHtml);
+                        document.getElementById('userInput').scrollIntoView({
+                            block: 'start',
+                            behavior: 'smooth'
+    
+                        });
+                        alert("ok")
+                        taoCookie("qts", undefined, 1)
+                        gotoBottom();
+                    });
                 }
-                
-                    
-                
-                
             }
             
             $("#textInput").keypress(function(e) {               

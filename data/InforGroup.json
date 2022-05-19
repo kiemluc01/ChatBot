@@ -106,6 +106,12 @@
             "questions": ["thời khóa biểu"],
             "answers": ["mã sinh viên của bạn là gì?"],
             "context_set": ""
+        },
+        {
+            "tag": ["ngày đăng kí môn học"],
+            "questions": ["ngày đăng kí môn học"],
+            "answers": ["mã sinh viên của bạn là gì?"],
+            "context_set": ""
         }
     ]
 
