@@ -37,14 +37,14 @@ def getRespone(userText,db):
                 return intents["answers"][random.randint(0, len(intents["answers"])-1)]
     return "Thông tin này AI chưa được học :D"
 
-def getDKMH(user , password):
+def dkmh(user , password):
+    chromedriver_autoinstaller.install()
     chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--incognito")
     # setting headless parameter
     chrome_options.headless = True
-    driver = webdriver.Chrome(chrome_options =chrome_options)
+    driver = webdriver.Chrome()
     driver.get("http://daotao.ute.udn.vn/viewsmsg.asp")
-    # username = "1911505310246"
-    # password = "190201"
     driver.find_element_by_name("maSV").send_keys(user)
     # find password input field and insert password as well
     driver.find_element_by_name("pw").send_keys(password)
@@ -57,29 +57,28 @@ def getDKMH(user , password):
         dataaa = []
         dataaa = driver.find_element_by_xpath("//td[@id='pagemain']").text
         if(str(dataaa).find("Đăng nhập không hợp lệ") >= 0):
-            print("Tài khoản hoặc mật khẩu không chính xác!!!")
+            driver.quit()
+            return "Tài khoản hoặc mật khẩu không chính xác!!!"
         else:
             driver.get("http://daotao.ute.udn.vn/dkmhtc.asp")
-            dataa = driver.find_element_by_xpath("//div[@class='clearfix']//div//table//tbody//tr//div//li")
-            print(dataa.text)
+            dataa = driver.find_element_by_xpath("//div[@class='clearfix']//div//table//tbody//tr//div//li").text
+            driver.quit()
+            return dataa
     else:
-        print("tài khoản hoặc mật khẩu không chính xác!!!")
+        driver.quit()
+        return "Tài khoản hoặc mật khẩu không chính xác!!!"
 def lichhoc(maSV):
 
-    chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
-                                        # and if it doesn't exist, download it automatically,
-                                        # then add chromedriver to path
+    chromedriver_autoinstaller.install()
 
     chrome_options = webdriver.ChromeOptions()
     # setting headless parameter
     chrome_options.headless = True
     chrome_options.add_argument("--incognito")
-    driver = webdriver.Chrome(chrome_options = chrome_options)
+    driver = webdriver.Chrome(chrome_options =chrome_options)
     driver.get("http://daotao.ute.udn.vn/timetable.asp")
     driver.find_element_by_name("maSV").send_keys(maSV)
-    print(2)
     if(maSV.isnumeric()):
-        print(3)
         driver.find_element_by_xpath("//form[@action='svtkb.asp']//table//tbody//tr//td//table//tbody//tr//td//input[@type='submit']").click()
         data =[]
         data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr")
@@ -99,21 +98,24 @@ def lichhoc(maSV):
 
         data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr//td")
         for i in range(d*9):
-            
             if i % 9 == 8:
                 result+=str(data[i].text)+"\n"
             else:
-                result+=str(data[i].text)+", "
-        print(result)
+                if i%9 == 7:
+                    result+=str(data[i].text)
+                else:
+                    result+=str(data[i].text)+", "
+        driver.quit()
         return result
-    print(4)
+    driver.quit()
     return "Mã sinh viên không đúng"
 def hocphi():
     chromedriver_autoinstaller.install() 
     chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--incognito")
 # setting headless parameter
     chrome_options.headless = True
-    driver = webdriver.Chrome(chrome_options = chrome_options)
+    driver = webdriver.Chrome(chrome_options =chrome_options)
     driver.get("http://daotao.ute.udn.vn/viewmsg.asp")
     a = driver.find_elements_by_xpath("//td[@id='pagemain']//a")
     # a = driver.find_elements_by_xpath("//td[@id='pagemain']//table//tbody//tr//td//a")
@@ -123,9 +125,50 @@ def hocphi():
             i.click()
             break
     td = driver.find_element_by_xpath("//td[@style='font-size:14px;padding-left: 1em']").text
-    print(str(td).split("\n")[0])
+    # print(str(td).split("\n")[0])
     strr = str(td).split("\n")[0]
     index = strr.find("ngày")
-    print(strr[index:len(strr)])
     data = strr[index:len(strr)]
+    driver.quit()
     return data
+def lichthi(user , password):
+    chromedriver_autoinstaller.install()  
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--incognito")
+    # setting headless parameter
+    chrome_options.headless = True
+    driver = webdriver.Chrome(chrome_options=chrome_options)
+    driver.get("http://daotao.ute.udn.vn/viewsmsg.asp")
+    driver.find_element_by_name("maSV").send_keys(user)
+    # find password input field and insert password as well
+    driver.find_element_by_name("pw").send_keys(password)
+    # click login button
+
+    driver.find_element_by_xpath("//tbody//tr//td//input[@type='submit']").click()
+
+    if(user.isnumeric()):
+        dataa = []
+        dataaa = []
+        dataaa = driver.find_element_by_xpath("//td[@id='pagemain']").text
+        if(str(dataaa).find("Đăng nhập không hợp lệ") >= 0):
+            driver.quit()
+            return "Tài khoản hoặc mật khẩu không chính xác!!!"
+        else:
+            driver.get("http://daotao.ute.udn.vn/examtimesv.asp")
+            driver.find_element_by_name("masv").send_keys(user)
+            driver.find_element_by_xpath("//form[@action='examTimeSv.asp']//table[@bgcolor='#CDF3AB']//tbody//tr//td//table//tbody//tr//td//input[@type='submit']").click()
+    #         dataa = driver.find_element_by_xpath("//div[@class='clearfix']//div//table//tbody//tr//div//li")
+            data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//td")
+            
+            result = ""
+            index = 0
+            for i in data:
+                if index%7 == 6:
+                    result+=i.text+'\n'
+                else:
+                    result+=i.text+', '
+                index+=1
+            driver.quit()
+            return result
+    driver.quit()
+    return "tài khoản hoặc mật khẩu không chính xác!!!"

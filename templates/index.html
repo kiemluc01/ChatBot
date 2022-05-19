@@ -40,8 +40,10 @@
                 <div class="botText_container">
                     <img src="/static/images/avt_bot.png" alt="avt">
                     <p class="botText"><span>Chat với tôi!</span></p>
+                    
                 </div>
                 <div class="tmp"></div>
+               
             </div>
         </div>
         <div id="userInput">
@@ -51,8 +53,6 @@
         </div>
         <script>
             var DB = ""
-            
-            taoCookie("qts","",1000)
             function gotoBottom(){
                 var element = document.getElementById("chatbox");
                 element.scrollTop = element.scrollHeight- element.clientHeight
@@ -65,66 +65,127 @@
                 var userHtml = '<div class="container"><div class="tmp"></div><div class="userText_container"><p class="userText"><span>' + rawText + '</span></p><img src="/static/images/avt_user.jpg" alt="avt"></div></div>';
                 $("#textInput").val("");
                 $("#chatbox").append(userHtml);
-                
+                gotoBottom()
                 document.getElementById('userInput').scrollIntoView({
                     block: 'start',
                     behavior: 'smooth'
                 });
                 // alert($.cookie("qts"))
                 if($.cookie("qts") == undefined || $.cookie("qts") == ""){
-
-                    if(rawText.search("thời khóa biểu") >= 0){
+                    
+                        if(rawText.search("thời khóa biểu") >= 0){
                         taoCookie("qts", "thời khóa biểu", 1)
-                    }else if(rawText.search("ngày đăng ký môn học") >= 0) {
-                        taoCookie("qts", "ngày đăng ký môn học", 1)
-                    }
-                    $.get("/get", {
-                        msg: rawText,
-                        DB: DB
-                    }).done(function(data) {
-                        var botHtml = '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>' + data + '</span></p></div><div class="tmp"></div></div>';
-                        $("#chatbox").append(botHtml);
-                        document.getElementById('userInput').scrollIntoView({
-                            block: 'start',
-                            behavior: 'smooth'
+                        }
+                        if(rawText.search("lịch thi") >= 0) {
+                            taoCookie("qts", "lịch thi", 1)
+                        }
+                        if(rawText.search("đăng kí môn học") >= 0) {
+                            taoCookie("qts", "đăng kí môn học", 1)
+                        }
+                        $.get("/get", {
+                            msg: rawText,
+                            DB: DB
+                        }).done(function(data) {
+                            var botHtml = '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>' + data + '</span></p></div><div class="tmp"></div></div>';
+                            $("#chatbox").append(botHtml);
+                            document.getElementById('userInput').scrollIntoView({
+                                block: 'start',
+                                behavior: 'smooth'
 
+                            });
+                            gotoBottom();
                         });
-                        gotoBottom();
-                    });
+                    
+                    
                 }else
                 if($.cookie("qts") == "thời khóa biểu"){
                     $.get("/tkb", {
                         msv: rawText
                     }).done(function(data) {
-                        var botHtml = '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>' + data + '</span></p></div><div class="tmp"></div></div>';
+                        data = data.split("\n")
+                        var botHtml = ""
+                        for(i = 0;i<data.length;i++){
+                            if(data[i]!= "")
+                                botHtml+= '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>' + data[i] + '</span></p></div><div class="tmp"></div></div>';
+                        }
+                       
                         $("#chatbox").append(botHtml);
                         document.getElementById('userInput').scrollIntoView({
                             block: 'start',
                             behavior: 'smooth'
     
                         });
-                        alert("ok")
-                        taoCookie("qts", undefined, 1)
+                        taoCookie("qts", '', 1)
                         gotoBottom();
                     });
                 }else
-                if($.cookie("qts") == "ngày đăng kí môn học"){
-                    $.get("/dkmh", {
-                        msv: rawText,
-                        pw : pwText
+                if($.cookie("qts") == "lịch thi"){
+                    if($.cookie("msv") == undefined || $.cookie("msv") == ""){
+                        taoCookie("msv",rawText,1)
+                        var botHtml = '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>nhập mật khẩu của bạn</span></p></div><div class="tmp"></div></div>';
+                        $("#chatbox").append(botHtml);
+                        document.getElementById('userInput').scrollIntoView({
+                            block: 'start',
+                            behavior: 'smooth'
+
+                        });
+                        gotoBottom();
+                    }else{
+                        $.get("/lt", {
+                        msv: $.cookie("msv"),
+                        pw : rawText
                     }).done(function(data) {
-                        var botHtml = '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>' + data + '</span></p></div><div class="tmp"></div></div>';
+                        data = data.split("\n")
+                        var botHtml = ""
+                        for(i = 1;i<data.length;i++){
+                            if(data[i]!= "")
+                                botHtml+= '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>' + data[i] + '</span></p></div><div class="tmp"></div></div>';
+                        }
                         $("#chatbox").append(botHtml);
                         document.getElementById('userInput').scrollIntoView({
                             block: 'start',
                             behavior: 'smooth'
     
                         });
-                        alert("ok")
-                        taoCookie("qts", undefined, 1)
+                        taoCookie("msv",'',1)
+                        taoCookie("qts",'',1)
                         gotoBottom();
                     });
+                    }
+                    
+                }else{
+                    if($.cookie("qts") == "đăng kí môn học"){
+                    if($.cookie("msv") == undefined || $.cookie("msv") == ""){
+                        taoCookie("msv",rawText,1)
+                        var botHtml = '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>nhập mật khẩu của bạn</span></p></div><div class="tmp"></div></div>';
+                        $("#chatbox").append(botHtml);
+                        document.getElementById('userInput').scrollIntoView({
+                            block: 'start',
+                            behavior: 'smooth'
+
+                        });
+                        gotoBottom();
+                    }else{
+                        $.get("/dkmh", {
+                        msv: $.cookie("msv"),
+                        pw : rawText
+                    }).done(function(data) {
+                        botHtml+= '<div class="container"><div class="botText_container"><img src="/static/images/avt_bot.png" alt="avt"><p class="botText"><span>' + data + '</span></p></div><div class="tmp"></div></div>';                       
+                        $("#chatbox").append(botHtml);
+                        document.getElementById('userInput').scrollIntoView({
+                            block: 'start',
+                            behavior: 'smooth'
+    
+                        });
+                        taoCookie("msv",'',1)
+                        taoCookie("qts",'',1)
+                        gotoBottom();
+                    });
+                    }
+                    
                 }
+                }
+                
             }
             
             $("#textInput").keypress(function(e) {               
