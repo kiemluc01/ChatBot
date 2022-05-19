@@ -65,13 +65,13 @@ def getLichThi(user , password):
     else:
         print("tài khoản hoặc mật khẩu không chính xác!!!")
 def lichhoc(maSV):
-    print(1)
+
     chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
-                                      # and if it doesn't exist, download it automatically,
-                                      # then add chromedriver to path
+                                        # and if it doesn't exist, download it automatically,
+                                        # then add chromedriver to path
 
     chrome_options = webdriver.ChromeOptions()
-# setting headless parameter
+    # setting headless parameter
     chrome_options.headless = True
     chrome_options.add_argument("--incognito")
     driver = webdriver.Chrome(chrome_options = chrome_options)
@@ -83,9 +83,9 @@ def lichhoc(maSV):
         driver.find_element_by_xpath("//form[@action='svtkb.asp']//table//tbody//tr//td//table//tbody//tr//td//input[@type='submit']").click()
         data =[]
         data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr")
-# result = requests.get(driver)
-# soup = BeautifulSoup(driver,"html.parser")
-# result = str(data).split(" ")
+    # result = requests.get(driver)
+    # soup = BeautifulSoup(driver,"html.parser")
+    # result = str(data).split(" ")
         d =0
         head = data[0]
         for i in data:
@@ -93,21 +93,19 @@ def lichhoc(maSV):
                 d-=1
                 break
             d+=1
-        result = []
+        result = ""
         data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr//th")
-        for i in range(9):
-            result.append([])
+        
 
         data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr//td")
         for i in range(d*9):
-            result[i%9].append(str(data[i].text))
-        # dt = pd.DataFrame(np.array(result))
-        # print(display(dt))
-        strr = "</br>"
-        for i in result:
-            strr += '</br> '+i
-        print(strr)
-        return strr
+            
+            if i % 9 == 8:
+                result+=str(data[i].text)+"\n"
+            else:
+                result+=str(data[i].text)+", "
+        print(result)
+        return result
     print(4)
     return "Mã sinh viên không đúng"
 def hocphi():
