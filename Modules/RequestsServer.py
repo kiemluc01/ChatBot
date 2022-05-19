@@ -51,3 +51,55 @@ def getLichThi(user , password):
     driver.get("http://daotao.ute.udn.vn/dkmhtc.asp")
     dataa = driver.find_element_by_xpath("//div[@class='clearfix']//div//table//tbody//tr//div//li").text
     return dataa
+def lichhoc(maSV):
+    chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
+                                      # and if it doesn't exist, download it automatically,
+                                      # then add chromedriver to path
+
+    chrome_options = webdriver.ChromeOptions()
+# setting headless parameter
+    chrome_options.headless = True
+    driver = webdriver.Chrome()
+    driver.get("http://daotao.ute.udn.vn/timetable.asp")
+    driver.find_element_by_name("maSV").send_keys(maSV)
+    driver.find_element_by_xpath("//form[@action='svtkb.asp']//table//tbody//tr//td//table//tbody//tr//td//input[@type='submit']").click()
+    data =[]
+    data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr")
+# result = requests.get(driver)
+# soup = BeautifulSoup(driver,"html.parser")
+# result = str(data).split(" ")
+    d =0
+    head = data[0]
+    for i in data:
+        if d!= 0 and i.text.find("Lớp")>=0:
+            d-=1
+            break
+        d+=1
+    result = []
+    data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr//th")
+    for i in range(9):
+        result.append([])
+
+    data = driver.find_elements_by_xpath("//table[@bgcolor='#E7EBDE']//tbody//tr//td")
+    for i in range(d*9):
+        result[i%9].append(str(data[i].text))
+    dt = pd.DataFrame(np.array(result))
+    print(display(dt))
+    return dt
+def hocphi():
+    driver.get("http://daotao.ute.udn.vn/viewmsg.asp")
+    a = driver.find_elements_by_xpath("//td[@id='pagemain']//a")
+    # a = driver.find_elements_by_xpath("//td[@id='pagemain']//table//tbody//tr//td//a")
+    for i in a:
+    #     print(i.text)
+        if i.text.find("thu học phí")>=0:
+            print("đây rồi")
+            i.click()
+            break
+    td = driver.find_element_by_xpath("//td[@style='font-size:14px;padding-left: 1em']").text
+    print(str(td).split("\n")[0])
+    strr = str(td).split("\n")[0]
+    index = strr.find("ngày")
+    print(strr[index:len(strr)])
+    data = strr[index:len(strr)]
+    return data
