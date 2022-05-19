@@ -100,6 +100,12 @@
             "questions": ["Bạn là ai", "tên bạn là gì?", "đang nhắn tin với ai"],
             "answers": ["Tôi lad ChatBot AI được các thành viên nhóm 7 tạo ra nhằm giải đáp các thắc mắc của các bạn! hãy hỏi tôi bất cứ điều gì, tôi sẽ trả lời nếu nó nằm trong phạm vi hiểu biết của tôi!"],
             "context_set": ""
+        },
+        {
+            "tag": ["thời khóa biểu"],
+            "questions": ["thời khóa biểu"],
+            "answers": ["mã sinh viên của bạn là gì?"],
+            "context_set": ""
         }
     ]
 

@@ -2,6 +2,10 @@ import json
 from datetime import date, datetime
 import random
 from Modules import HandleString as hs
+import chromedriver_autoinstaller
+from selenium import webdriver
+import numpy as np
+import pandas as pd
 
 #main requests
 def main_requests(userText, db):
@@ -37,7 +41,7 @@ def getLichThi(user , password):
     chrome_options = webdriver.ChromeOptions()
     # setting headless parameter
     chrome_options.headless = True
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(chrome_options =chrome_options)
     driver.get("http://daotao.ute.udn.vn/viewsmsg.asp")
     # username = "1911505310246"
     # password = "190201"
@@ -68,7 +72,7 @@ def lichhoc(maSV):
     chrome_options = webdriver.ChromeOptions()
 # setting headless parameter
     chrome_options.headless = True
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(chrome_options = chrome_options)
     driver.get("http://daotao.ute.udn.vn/timetable.asp")
     driver.find_element_by_name("maSV").send_keys(maSV)
     if(maSV.isnumeric()):
